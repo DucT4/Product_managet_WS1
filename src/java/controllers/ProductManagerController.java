@@ -38,7 +38,6 @@ public class ProductManagerController extends HttpServlet {
           
         session.setAttribute("categories", listCategories);
         session.setAttribute("PRO_LIST", listPro);
-        System.out.println("aaaaa");
         req.getRequestDispatcher("product-management.jsp").forward(req, resp);
     }
 

@@ -95,14 +95,14 @@ public class MainController extends HttpServlet {
                         url = PRODUCT_MANAGER;
                         break;
                     case "deleteProduct":
-                        url = PRODUCT_MANAGER;
+                        url = DELETE_PRODUCT;
                         break;
                     case "logout":
 
                         url = LOGOUT;
                         break;
                     case "updateProduct":
-                        System.out.println("update product");
+                        System.out.println("update main");
                         url = UPDATE_PRODUCT;
                         break;
                     default:

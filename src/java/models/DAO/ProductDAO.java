@@ -36,33 +36,34 @@ public class ProductDAO implements Accessible<ProductDTO> {
             conn = ConnectDB.getConnection();
             //tao cau query
             String sql = "UPDATE [dbo].[products]\n"
-                    + "   SET [productId] = ?,\n"
-                    + "      ,[productName] = ?,\n"
-                    + "      ,[productImage] = ?,\n"
-                    + "      ,[brief] = ?,\n"
-                    + "      ,[postedDate] = ?,\n"
-                    + "      ,[typeId] = ?,\n"
-                    + "      ,[account] =?,\n"
-                    + "      ,[unit] = ?,\n"
-                    + "      ,[price] = ?,\n"
-                    + "      ,[discount] = ?,\n"
+                    + "   SET [productName] = ?,\n"
+                    + "      [productImage] = ?,\n"
+                    + "      [brief] = ?,\n"
+                    + "      [unit] = ?,\n"
+                    + "      [price] = ?,\n"
+                    + "      [discount] = ?\n"
                     + " WHERE productId=?";
             //tao doi tg query
+            System.out.println("update AAA");
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, product.getProductName());
             ps.setString(2, product.getProductImage());
             ps.setString(3, product.getBrief());
-            ps.setDate(4, new java.sql.Date(product.getPostedDate().getTime()));
-            ps.setString(5, product.getType().getCategoryName()); 
-            ps.setString(6, product.getAccount().getAccoun()); 
-            ps.setString(7, product.getUnit());
-            ps.setInt(8, product.getPrice());
-            ps.setInt(9, product.getDiscount());
-            ps.setString(10, product.getProductId());
+            ps.setString(4, product.getUnit());
+            ps.setInt(5, product.getPrice());
+            ps.setInt(6, product.getDiscount());
+            ps.setString(7, product.getProductId());
             rs = ps.executeUpdate();
             System.out.println("rows update: " + rs);
         } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2.getMessage());
+            }
+            System.out.println(e.getMessage());
         }
         return rs;
     }
@@ -77,12 +78,21 @@ public class ProductDAO implements Accessible<ProductDTO> {
                     + "      WHERE  productId=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, product.getProductId());
-            ps.executeUpdate();
+            System.out.println("delete rows:");
+            rs = ps.executeUpdate();
+
             System.out.println("rows delete: " + rs);
         } catch (Exception e) {
-            e.printStackTrace();
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2.getMessage());
+            }
         }
-          return rs;
+        return rs;
     }
 
     @Override

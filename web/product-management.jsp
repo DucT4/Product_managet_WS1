@@ -227,7 +227,7 @@
                         <input type="hidden" name="action" value="updateProduct" />
                         <input type="hidden" name="brief" value="${product.brief}" />
                          <input type="hidden" name="unit" value="${product.unit}" />
-                          <input type="hidden" name="accoun" value="${product.account.accoun}" />
+<!--                          <input type="hidden" name="accoun" value="${product.account.accoun}" />-->
                         <tr>
                             <td> <input type="text" name="productId" value="${product.productId}" readonly />
                             </td>
@@ -235,7 +235,7 @@
                                 </td>
                             <td><input type="text" name="productImg" value="${product.productImage}" />
                                 <img src="${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail"></td>
-                            <td><input type="text" name="productCategoryName" value="${product.type.categoryName}" /></td>
+                            <td><input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/></td>
                             <td><input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span></td>
                             <td><input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span></td>
                             <td><input type="text" name="postedDate" value="${product.postedDate}" readonly /> </td>
