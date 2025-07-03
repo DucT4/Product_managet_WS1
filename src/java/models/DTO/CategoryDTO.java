@@ -10,20 +10,38 @@ import java.io.Serializable;
  *
  * @author Admin
  */
-public class CategoryDTO implements Serializable{
+public class CategoryDTO implements Serializable {
+
     private int typeId;
     private String categoryName;
-    private  String memo;
+    private String memo;
+    private boolean isActive;
 
     public CategoryDTO() {
     }
+
+    public CategoryDTO(int typeId, String categoryName, String memo, boolean isActive) {
+        this.typeId = typeId;
+        this.categoryName = categoryName;
+        this.memo = memo;
+        this.isActive = isActive;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+
 
     public CategoryDTO(int typeId, String categoryName, String memo) {
         this.typeId = typeId;
         this.categoryName = categoryName;
         this.memo = memo;
     }
-
 
     public int getTypeId() {
         return typeId;
@@ -48,5 +66,5 @@ public class CategoryDTO implements Serializable{
     public void setMemo(String memo) {
         this.memo = memo;
     }
-    
+
 }

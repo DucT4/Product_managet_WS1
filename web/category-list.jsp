@@ -31,7 +31,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${sessionScope.categories}" var="category">
+                    <c:forEach items="${categories}" var="category">
+                    <c:if test="${category.isActive}">
+                            
+                  
                         <tr>
                             <td>
                                 <input type="text" value="${category.typeId}" readonly class="form-control-plaintext" style="width:60px"/>
@@ -54,9 +57,12 @@
                                     <input type="hidden" name="action" value="delete" />
                                     <input type="hidden" name="id" value="${category.typeId}" />
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                     
                                 </form>
+                              
                             </td>
                         </tr>
+                              </c:if>
                     </c:forEach>
 
                 </tbody>

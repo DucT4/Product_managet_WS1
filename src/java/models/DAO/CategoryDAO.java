@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import models.DTO.CategoryDTO;
+import models.DTO.ProductDTO;
 import util.ConnectDB;
 
 /**
@@ -77,8 +78,9 @@ public class CategoryDAO implements Accessible<CategoryDTO> {
             String sql = "SELECT [typeId]\n"
                     + "      ,[categoryName]\n"
                     + "      ,[memo]\n"
-                    + "  FROM [dbo].[categories] c\n"
-                    + "  WHERE c.typeId =?";
+                    + "      ,[isActive]\n"
+                    + "  FROM [dbo].[categories]\n"
+                    + "  WHERE typeId=?";
             // tao doi tg query
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(id));
@@ -89,7 +91,8 @@ public class CategoryDAO implements Accessible<CategoryDTO> {
                 int rsId = rs.getInt("typeId");
                 String categoryName = rs.getString("categoryName");
                 String memo = rs.getString("memo");
-                category = new CategoryDTO(rsId, categoryName, memo);
+                boolean isActive = rs.getBoolean("isActive");
+                category = new CategoryDTO(rsId, categoryName, memo, isActive);
             }
 
         } catch (Exception e) {
@@ -112,6 +115,7 @@ public class CategoryDAO implements Accessible<CategoryDTO> {
             String sql = "SELECT [typeId]\n"
                     + "      ,[categoryName]\n"
                     + "      ,[memo]\n"
+                    + "      ,[isActive]\n"
                     + "  FROM [dbo].[categories]";
             //tao doi tg query
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -122,8 +126,10 @@ public class CategoryDAO implements Accessible<CategoryDTO> {
                 int typeID = rs.getInt("typeId");
                 String categoryName = rs.getString("categoryName");
                 String memo = rs.getString("memo");
+                boolean isActive = rs.getBoolean("isActive");
+                System.out.println("is active :" + isActive);
                 // tao doi tg category
-                CategoryDTO category = new CategoryDTO(typeID, categoryName, memo);
+                CategoryDTO category = new CategoryDTO(typeID, categoryName, memo, isActive);
                 list.add(category);
             }
             System.out.println("eee" + conn.toString());
@@ -131,6 +137,55 @@ public class CategoryDAO implements Accessible<CategoryDTO> {
             e.printStackTrace();
         }
         return list;
+    }
+
+    //update status 
+    public void updateCategoryStatus() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            // Lấy danh sách tất cả category và product
+            CategoryDAO cateDAO = new CategoryDAO();
+            List<CategoryDTO> listCategories = cateDAO.listAll();
+
+            ProductDAO proDao = new ProductDAO();
+            List<ProductDTO> listProducts = proDao.listAll();
+
+            // Mở kết nối một lần
+            conn = ConnectDB.getConnection();
+
+            String sql = "UPDATE categories SET isActive = ? WHERE typeId = ?";
+            ps = conn.prepareStatement(sql);
+
+            for (CategoryDTO category : listCategories) {
+                int count = 0;
+                for (ProductDTO product : listProducts) {
+                    if (product.getType().getTypeId() == category.getTypeId()) {
+                        count++;
+                    }
+                }
+                System.out.println("cate name:" + category.getCategoryName());
+                System.out.println("count " + count );
+                boolean isActive = count > 0;
+                System.out.println("active :" + isActive);
+                ps.setBoolean(1, isActive);
+                ps.setInt(2, category.getTypeId());
+                ps.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
 }
