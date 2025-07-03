@@ -202,4 +202,58 @@ public class ProductDAO implements Accessible<ProductDTO> {
         return list;
     }
 
+    //searchByName
+    public List<ProductDTO> searchByName(String nameProduct) {
+        List<ProductDTO> listPro = new ArrayList<>();
+        ProductDTO product = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        try {
+            //connect database
+            conn = ConnectDB.getConnection();
+            //tao query
+            String sql = "SELECT * FROM products WHERE productName LIKE ?";
+            //tao doi tg query
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + nameProduct + "%");
+
+            //thuc thi
+            rs = ps.executeQuery();
+            System.out.println("rs:  " + rs);
+            while (rs.next()) {
+                String productId = rs.getString("productId");
+                String productName = rs.getString("productName");
+                String productImage = rs.getString("productImage");
+                String brief = rs.getString("brief");
+                Date postedDate = rs.getDate("postedDate");
+                int typeId = rs.getInt("typeId");
+                String accountID = rs.getString("account");
+                String unit = rs.getString("unit");
+                int price = rs.getInt("price");
+                int discount = rs.getInt("discount");
+
+                AccountDAO accDAO = new AccountDAO();
+                AccountDTO account = accDAO.getObjectById(accountID);
+                CategoryDAO cateDao = new CategoryDAO();
+                CategoryDTO category = cateDao.getObjectById(String.valueOf(typeId));
+
+                String categoryName = category.getCategoryName();
+                System.out.println("category name: " + categoryName);
+                product = new ProductDTO(productId, productName, productImage, brief, postedDate, category, account, unit, price, discount);
+                System.out.println("product : " + product);
+                listPro.add(product);
+            }
+        } catch (Exception e) {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return listPro;
+    }
+
 }

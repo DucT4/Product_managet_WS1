@@ -34,6 +34,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_PRODUCT = "updateProductServlet";
     private static final String PRODUCT_MANAGER = "productManagerServlet";
     private static final String DELETE_PRODUCT = "deleteProductServlet";
+    private static final String SEARCH_BY_NAME = "searchByNameServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -102,8 +103,10 @@ public class MainController extends HttpServlet {
                         url = LOGOUT;
                         break;
                     case "updateProduct":
-                        System.out.println("update main");
                         url = UPDATE_PRODUCT;
+                        break;
+                    case "searchByname":     
+                        url = SEARCH_BY_NAME;
                         break;
                     default:
                         url = WELCOME;
