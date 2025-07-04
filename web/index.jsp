@@ -2,50 +2,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Management System - Trang chủ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang quản lý</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         body {
-            background: #f8f9fa;
+            background: #f4f6fb;
         }
         .hero-section {
-            background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             color: #fff;
-            padding: 60px 0 40px 0;
-            text-align: center;
+            padding: 64px 0 48px 0;
             border-radius: 0 0 32px 32px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+            margin-bottom: 40px;
         }
         .hero-title {
-            font-size: 2.6rem;
-            font-weight: bold;
-            margin-bottom: 18px;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #100f0f;
             letter-spacing: 1px;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-        .hero-desc {
-            font-size: 1.2rem;
-            margin-bottom: 28px;
-        }
-        .feature-icon {
-            font-size: 2.2rem;
-            color: #6a82fb;
+        .hero-desc {  
+            font-size: 1.25rem;
+            margin-bottom: 32px;
+            font-weight: 500;
+            color: #0d0d0e;
         }
         .feature-card {
-            border-radius: 16px;
-            box-shadow: 0 2px 12px #eaeaea;
-            transition: transform .2s;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+            background: #fff;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
         .feature-card:hover {
             transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 32px rgba(102,126,234,0.13);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #764ba2;
+            background: #f4f6fb;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
         }
         .contact-box {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px #eaeaea;
-            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.09);
+            padding: 32px 24px 28px 24px;
+            margin-top: 16px;
+        }
+        .contact-box a {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .contact-box a:hover {
+            color: #764ba2;
         }
         .footer {
-            margin-top: 48px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 0 0 16px 16px;
+            margin-top: 60px;
+            box-shadow: 0 -2px 12px rgba(102,126,234,0.08);
+        }
+        .footer .text-muted {
+            color: #e3e6f0 !important;
+        }
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-section {
+                padding: 36px 0 24px 0;
+            }
+            .feature-icon {
+                font-size: 2rem;
+                width: 48px;
+                height: 48px;
+            }
+            .contact-box {
+                padding: 18px 8px 18px 8px;
+            }
         }
     </style>
 </head>
@@ -120,7 +170,7 @@
                     <h4 class="mb-3 fw-bold">Liên hệ & Hỗ trợ</h4>
                     <div>Email: <a href="mailto:support@productsystem.com">support@productsystem.com</a></div>
                     <div>Hotline: <b>0123 456 789</b></div>
-                    <div>Địa chỉ:FPT University, TP.HCM</div>
+                    <div>Địa chỉ: FPT University, TP.HCM</div>
                     <div class="mt-3">
                         <a href="login.jsp" class="btn btn-primary px-4">Đăng nhập quản trị</a>
                     </div>
@@ -129,13 +179,11 @@
         </div>
     </div>
     <!-- Footer -->
-    <footer class="footer mt-5 py-3 bg-light">
+    <footer class="footer mt-5 py-3">
         <div class="container text-center">
             <span class="text-muted">© 2025 Product Management System</span>
         </div>
     </footer>
-    <!-- Bootstrap icons CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

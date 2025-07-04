@@ -26,7 +26,7 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CATEGORY = "updateCategoryServlet";
     private static final String DELETE_CATEGORY = "deleteServlet";
     private static final String PRODUCTS_PORTFOLIO = "productsServlet";
-    private static final String PRODUCT_DETAIL = "productServlet";
+    private static final String PRODUCT_DETAIL = "productDetailServlet";
     private static final String CREATE_ACCOUNT = "createAccountController";
     private static final String ACCOUNT = "accountServlet";
     private static final String DELETE_ACCOUNT = "deleteAccountServlet";

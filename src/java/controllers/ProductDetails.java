@@ -21,20 +21,38 @@ import models.DTO.ProductDTO;
  *
  * @author Admin
  */
-@WebServlet(name = "productDetails", urlPatterns = "/productServlet")
+@WebServlet(name = "productDetails", urlPatterns = "/productDetailServlet")
 public class ProductDetails extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         ProductDAO dao = new ProductDAO();
-        ProductDTO product = new ProductDTO();
-        product = dao.getObjectById(id);
-        System.out.println("ten : " +product.getUnit());
-        
+        ProductDTO product = dao.getObjectById(id);
+
         HttpSession session = req.getSession();
+        // Lấy danh sách sản phẩm đã xem từ session
+        List<ProductDTO> listProductViewed = (List<ProductDTO>) session.getAttribute("LIST_PRODUCT_VIEWED");
+        if (listProductViewed == null) {
+            listProductViewed = new ArrayList<>();
+        }
+
+        // check trugn lap 
+        boolean alreadyViewed = false;
+        for (ProductDTO p : listProductViewed) {
+            if (p.getProductId().equals(product.getProductId())) {
+                alreadyViewed = true;
+                break;
+            }
+        }
+        if (!alreadyViewed) {
+            listProductViewed.add(product);
+        }
+
+        session.setAttribute("LIST_PRODUCT_VIEWED", listProductViewed);
         session.setAttribute("Product", product);
         req.getRequestDispatcher("product-details.jsp").forward(req, resp);
     }
+    
 
 }

@@ -11,13 +11,145 @@
     <head>
         <title>Danh mục sản phẩm</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/index.css">
         <style>
+            body {
+                background: #f4f6fb;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .container {
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+                padding: 36px 32px 32px 32px;
+                margin-top: 48px;
+                margin-bottom: 32px;
+                max-width: 1200px;
+            }
             .sidebar {
-                background: #f8f9fa;
-                padding: 1rem;
+                background: #f9fafd;
+                border-radius: 12px;
+                box-shadow: 0 2px 12px rgba(102,126,234,0.07);
+                padding: 24px 18px;
+                margin-bottom: 24px;
+            }
+            .sidebar h3 {
+                font-weight: 700;
+                color: #764ba2;
+                margin-bottom: 18px;
+                font-size: 1.25rem;
+            }
+            .list-group-item {
+                border: none;
+                border-radius: 8px !important;
+                margin-bottom: 6px;
+                background: #fff;
+                transition: background 0.15s;
+            }
+            .list-group-item a {
+                color: #667eea;
+                font-weight: 600;
+                text-decoration: none;
+                display: block;
+                padding: 6px 0;
+                transition: color 0.15s;
+            }
+            .list-group-item a:hover {
+                color: #764ba2;
+                text-decoration: underline;
+            }
+            h2 {
+                font-weight: 800;
+                color: #764ba2;
+                letter-spacing: 1px;
+                margin-bottom: 24px;
+                text-shadow: 0 2px 8px rgba(102,126,234,0.08);
             }
             .product-grid {
-                margin-top: 1rem;
+                margin-top: 8px;
+            }
+            .card {
+                border: none;
+                border-radius: 14px;
+                box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+                transition: transform 0.15s, box-shadow 0.15s;
+            }
+            .card:hover {
+                transform: translateY(-6px) scale(1.03);
+                box-shadow: 0 6px 32px rgba(102,126,234,0.13);
+            }
+            .card-img-top {
+                border-radius: 14px 14px 0 0;
+                object-fit: cover;
+                height: 180px;
+                background: #f4f6fb;
+            }
+            .card-title {
+                font-weight: 700;
+                color: #667eea;
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+            .card-text {
+                color: #764ba2;
+                font-weight: 600;
+                margin-bottom: 14px;
+            }
+            .btn-primary {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                font-weight: 700;
+                border-radius: 8px;
+                padding: 8px 18px;
+                font-size: 1rem;
+                transition: background 0.2s;
+            }
+            .btn-primary:hover {
+                background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            }
+            .footer {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+                margin-top: auto;
+                border-radius: 0 0 12px 12px;
+                padding: 16px 0;
+                box-shadow: 0 -2px 12px rgba(102,126,234,0.08);
+            }
+            .footer .text-muted {
+                color: #fff !important;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+            @media (max-width: 991.98px) {
+                .container {
+                    padding: 18px 8px 18px 8px;
+                }
+                .sidebar {
+                    padding: 14px 6px;
+                }
+                h2 {
+                    font-size: 1.5rem;
+                }
+                .card-img-top {
+                    height: 140px;
+                }
+            }
+            @media (max-width: 576px) {
+                .container {
+                    padding: 10px 2px 10px 2px;
+                }
+                .sidebar {
+                    padding: 8px 2px;
+                }
+                h2 {
+                    font-size: 1.1rem;
+                }
+                .card-img-top {
+                    height: 100px;
+                }
             }
         </style>
     </head>
@@ -25,7 +157,6 @@
         <%@include file="/menu.jsp" %>
         <div class="container mt-4">
             <div class="row">
-
                 <input type="hidden" name="action" value="portfolio" />
                 <div class="col-md-3 sidebar">
                     <h3>Danh mục</h3>
@@ -41,27 +172,22 @@
                     <h2>Danh sách sản phẩm</h2>
                     <div class="row product-grid">
                         <c:forEach items="${sessionScope.PRO_LIST}" var="product">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="card mb-4">
-                                    <img src="${product.productImage}" class="card-img-top" alt="${product.productName}">
-                                    <div class="card-body">
+                            <div class="col-md-4 col-sm-6 mb-4">
+                                <div class="card h-100">
+                                    <img src="images/${product.productImage}" class="card-img-top" alt="${product.productName}">
+                                    <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">${product.productName}</h5>
                                         <p class="card-text">${product.price} VND</p>
-                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-primary">Xem chi tiết</a>                                        
-                                        
-
+                                        <a href="main?action=product-detail&id=${product.productId}" class="btn btn-primary mt-auto">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
-        <footer class="footer mt-auto py-3 bg-light">
+        <footer class="footer mt-auto py-3">
             <div class="container text-center">
                 <span class="text-muted">© 2025 Product Management System</span>
             </div>
@@ -69,4 +195,3 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
-

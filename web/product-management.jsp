@@ -12,191 +12,159 @@
         <title>Quản lý sản phẩm</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/index.css">
         <style>
             body {
-                background-color: #f8f9fa;
+                background: #f4f6fb;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
             }
-
             .container {
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 0 20px rgba(0,0,0,0.1);
-                padding: 30px;
-                margin-top: 20px;
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+                padding: 36px 32px 32px 32px;
+                margin-top: 48px;
+                margin-bottom: 32px;
+                max-width: 1200px;
             }
-
             h2 {
-                color: #2c3e50;
-                font-weight: 600;
-                border-bottom: 3px solid #007bff;
-                padding-bottom: 10px;
-                margin-bottom: 30px;
+                font-weight: 800;
+                color: #764ba2;
+                letter-spacing: 1px;
+                text-shadow: 0 2px 8px rgba(102,126,234,0.08);
             }
-
-            .table {
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            form[action="main"][method="get"] {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+            form[action="main"][method="get"] input[type="text"] {
                 border-radius: 8px;
-                overflow: hidden;
-            }
-
-            .table thead th {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                font-weight: 600;
-                text-align: center;
-                border: none;
-                padding: 15px 10px;
-            }
-
-            .table tbody tr {
-                transition: all 0.3s ease;
-            }
-
-            .table tbody tr:hover {
-                background-color: #f8f9fa;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            }
-
-            .table td {
-                vertical-align: middle;
-                padding: 12px 8px;
-                border-color: #e9ecef;
-            }
-
-            /* Styling cho input fields */
-            input[type="text"] {
                 border: 1px solid #e3e6f0;
-                border-radius: 5px;
-                padding: 8px 10px;
+                background: #f9fafd;
+                font-size: 1rem;
+                padding: 8px 12px;
+                width: 260px;
+                transition: border 0.2s;
+            }
+            form[action="main"][method="get"] input[type="text"]:focus {
+                border-color: #764ba2;
+                background: #fff;
+                box-shadow: 0 0 0 0.2rem rgba(118,75,162,0.08);
+            }
+            form[action="main"][method="get"] button {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                font-weight: 700;
+                padding: 8px 22px;
+                font-size: 1rem;
+                transition: background 0.2s;
+            }
+            form[action="main"][method="get"] button:hover {
+                background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            }
+            .table {
+                background: #fff;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 2px 12px rgba(102,126,234,0.07);
+            }
+            .table thead th {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+                font-weight: 700;
+                border: none;
+                font-size: 1.05rem;
+                vertical-align: middle;
+            }
+            .table-striped > tbody > tr:nth-of-type(odd) {
+                background-color: #f9fafd;
+            }
+            .table td, .table th {
+                vertical-align: middle;
+                padding: 12px 10px;
+            }
+            .table input[type="text"] {
+                border: 1px solid #e3e6f0;
+                border-radius: 6px;
+                padding: 4px 8px;
+                font-size: 0.98rem;
                 width: 100%;
-                font-size: 13px;
-                transition: all 0.3s ease;
+                background: #f9fafd;
+                transition: border 0.2s;
+            }
+            .table input[type="text"]:focus {
+                border-color: #764ba2;
                 background: #fff;
             }
-
-            input[type="text"]:focus {
-                border-color: #007bff;
-                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-                outline: none;
-                background: #f8f9fa;
-            }
-
-            input[type="text"]:read-only {
-                background-color: #e9ecef;
-                cursor: not-allowed;
-                font-weight: 600;
-                color: #6c757d;
-            }
-
-            /* Styling cho buttons */
-            .btn {
-                border-radius: 20px;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                margin: 2px;
-            }
-
-            .btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
-
             .btn-warning {
-                background: linear-gradient(45deg, #ffc107, #ff8f00);
+                background: linear-gradient(90deg, #ffd700 0%, #ffb347 100%);
+                color: #764ba2;
                 border: none;
-                color: white;
+                font-weight: 700;
+                border-radius: 6px;
+                padding: 5px 14px;
+                margin-right: 6px;
+                transition: background 0.2s, color 0.2s;
             }
-
             .btn-warning:hover {
-                background: linear-gradient(45deg, #ff8f00, #ffc107);
-                color: white;
+                background: linear-gradient(90deg, #ffb347 0%, #ffd700 100%);
+                color: #333;
             }
-
             .btn-danger {
-                background: linear-gradient(45deg, #dc3545, #c82333);
+                background: linear-gradient(90deg, #ff5858 0%, #f857a6 100%);
+                color: #fff;
                 border: none;
+                font-weight: 700;
+                border-radius: 6px;
+                padding: 5px 14px;
+                transition: background 0.2s;
             }
-
             .btn-danger:hover {
-                background: linear-gradient(45deg, #c82333, #dc3545);
+                background: linear-gradient(90deg, #f857a6 0%, #ff5858 100%);
             }
-
-            /* Image styling */
             .img-thumbnail {
-                border: 2px solid #007bff;
                 border-radius: 8px;
-                transition: all 0.3s ease;
-                margin-left: 10px;
+                border: 1px solid #e3e6f0;
+                margin-left: 8px;
+                box-shadow: 0 1px 4px rgba(102,126,234,0.08);
             }
-
-            .img-thumbnail:hover {
-                transform: scale(1.1);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
-
-            /* Footer styling */
             .footer {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                margin-top: 50px;
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+                margin-top: auto;
+                border-radius: 0 0 12px 12px;
+                padding: 16px 0;
+                box-shadow: 0 -2px 12px rgba(102,126,234,0.08);
             }
-
-            /* Responsive adjustments */
-            @media (max-width: 768px) {
+            @media (max-width: 991.98px) {
                 .container {
-                    padding: 15px;
-                    margin: 10px;
+                    padding: 18px 8px 18px 8px;
                 }
-
-                .table {
-                    font-size: 12px;
+                h2 {
+                    font-size: 1.5rem;
                 }
-
-                input[type="text"] {
-                    font-size: 11px;
-                    padding: 6px 8px;
-                }
-
-                .btn {
-                    font-size: 11px;
-                    padding: 4px 8px;
+                .table th, .table td {
+                    font-size: 0.95rem;
+                    padding: 8px 4px;
                 }
             }
-
-            /* Animation for page load */
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
+            @media (max-width: 576px) {
+                .container {
+                    padding: 10px 2px 10px 2px;
                 }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
+                h2 {
+                    font-size: 1.1rem;
                 }
-            }
-
-            .container {
-                animation: fadeInUp 0.6s ease-out;
-            }
-
-            /* Custom scrollbar */
-            ::-webkit-scrollbar {
-                width: 8px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 10px;
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 10px;
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                .table th, .table td {
+                    font-size: 0.85rem;
+                    padding: 6px 2px;
+                }
             }
         </style>
     </head>
@@ -211,7 +179,7 @@
             <form action="main" method="get">
                 <input type="hidden" name="action" value="searchByname" />
                 <input type="text" name="searchName" placeholder="Nhập tên sản phẩm" />
-                <button type="submit">Tìm kiếm  </button>
+                <button type="submit">Tìm kiếm</button>
             </form>
             <table class="table table-striped">
                 <thead>
@@ -232,18 +200,29 @@
                         <input type="hidden" name="action" value="updateProduct" />
                         <input type="hidden" name="brief" value="${product.brief}" />
                         <input type="hidden" name="unit" value="${product.unit}" />
-<!--                          <input type="hidden" name="accoun" value="${product.account.accoun}" />-->
                         <tr>
-                            <td> <input type="text" name="productId" value="${product.productId}" readonly />
+                            <td>
+                                <input type="text" name="productId" value="${product.productId}" readonly />
                             </td>
-                            <td><input type="text" name="productName" value="${product.productName}" />
+                            <td>
+                                <input type="text" name="productName" value="${product.productName}" />
                             </td>
-                            <td><input type="text" name="productImg" value="${product.productImage}" />
-                                <img src="${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail"></td>
-                            <td><input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/></td>
-                            <td><input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span></td>
-                            <td><input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span></td>
-                            <td><input type="text" name="postedDate" value="${product.postedDate}" readonly /> </td>
+                            <td>
+                                <input type="text" name="productImg" value="${product.productImage}" />
+                                <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
+                            </td>
+                            <td>
+                                <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
+                            </td>
+                            <td>
+                                <input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span>
+                            </td>
+                            <td>
+                                <input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span>
+                            </td>
+                            <td>
+                                <input type="text" name="postedDate" value="${product.postedDate}" readonly />
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit me-1"></i>Sửa
@@ -251,11 +230,13 @@
                                 <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger">
                                     <i class="fas fa-trash me-1"></i>Xóa
                                 </a>
+                             <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                    <i class="fas fa-trash me-1"></i>Chi tiêts
+                                </a>
                             </td>
                         </tr>
                     </form>
-
-                </c:forEach>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
