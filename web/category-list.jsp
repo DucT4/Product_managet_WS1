@@ -12,89 +12,9 @@
         <title>Danh sách danh mục</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/index.css">
-        <style>
-            body {
-                background: #f4f6fb;
-            }
-            .category-table-container {
-                background: #fff;
-                border-radius: 12px;
-                box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-                padding: 32px 28px 28px 28px;
-                max-width: 900px;
-                margin: 0 auto;
-                margin-top: 40px;
-            }
-            .category-table-container h2 {
-                color: #2d3a4a;
-                font-weight: 700;
-                margin-bottom: 24px;
-                text-align: center;
-            }
-            .category-table th {
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-                color: #fff;
-                font-weight: 600;
-                border-top-left-radius: 8px;
-                border-top-right-radius: 8px;
-            }
-            .category-table td, .category-table th {
-                vertical-align: middle;
-                text-align: center;
-            }
-            .category-table input[readonly] {
-                background: #e9ecef;
-                color: #888;
-                font-weight: 600;
-                border: none;
-                text-align: center;
-            }
-            .category-table input[type="text"] {
-                border-radius: 6px;
-                border: 1px solid #e3e6f0;
-                padding: 6px 10px;
-                font-size: 15px;
-                background: #f9fafd;
-                transition: border 0.2s;
-            }
-            .category-table input[type="text"]:focus {
-                border-color: #667eea;
-                background: #fff;
-                outline: none;
-            }
-            .btn-success {
-                background: linear-gradient(45deg, #28a745, #218838);
-                border: none;
-                color: #fff;
-                font-weight: 600;
-                border-radius: 20px;
-                padding: 6px 18px;
-                transition: background 0.2s;
-            }
-            .btn-success:hover {
-                background: linear-gradient(45deg, #218838, #28a745);
-            }
-            .btn-danger {
-                background: linear-gradient(45deg, #dc3545, #c82333);
-                border: none;
-                color: #fff;
-                font-weight: 600;
-                border-radius: 20px;
-                padding: 6px 18px;
-                transition: background 0.2s;
-            }
-            .btn-danger:hover {
-                background: linear-gradient(45deg, #c82333, #dc3545);
-            }
-            .footer {
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-                color: #fff;
-                margin-top: 50px;
-                border-radius: 0 0 12px 12px;
-                padding: 16px 0;
-            }
-        </style>
+        <link rel="stylesheet" href="css/index.css">     
+        <link rel="stylesheet" href="css/category-list.css">
+       
     </head>
     <body>
         <c:if test="${empty sessionScope.account}">

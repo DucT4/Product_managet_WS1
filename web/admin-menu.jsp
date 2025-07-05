@@ -14,56 +14,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/index.css">
-        <style>
-            .navbar-custom {
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-                box-shadow: 0 2px 12px rgba(102,126,234,0.08);
-                border-radius: 0 0 16px 16px;
-                padding: 0.5rem 0;
-            }
-            .navbar-custom .navbar-brand {
-                color: #fff;
-                font-weight: 700;
-                font-size: 1.5rem;
-                letter-spacing: 1px;
-            }
-            .navbar-custom .nav-link {
-                color: #f4f6fb !important;
-                font-weight: 600;
-                margin-right: 10px;
-                transition: color 0.2s;
-                position: relative;
-            }
-            .navbar-custom .nav-link.active, 
-            .navbar-custom .nav-link:hover {
-                color: #ffd700 !important;
-            }
-            .navbar-custom .nav-link i {
-                margin-right: 6px;
-            }
-            .navbar-custom .user-greeting {
-                color: #fff;
-                font-weight: 500;
-                margin-right: 18px;
-                font-size: 1.05rem;
-                display: flex;
-                align-items: center;
-            }
-            .navbar-custom .user-greeting i {
-                margin-right: 7px;
-                color: #ffd700;
-            }
-            @media (max-width: 991.98px) {
-                .navbar-custom .navbar-nav {
-                    background: #764ba2;
-                    border-radius: 0 0 12px 12px;
-                    padding: 10px 0;
-                }
-                .navbar-custom .nav-link {
-                    color: #fff !important;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="css/admin-menu.css">
+       
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-custom">

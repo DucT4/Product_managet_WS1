@@ -1,0 +1,89 @@
+  body {
+            background: #f4f6fb;
+        }
+        .hero-section {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 64px 0 48px 0;
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+            margin-bottom: 40px;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #100f0f;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .hero-desc {  
+            font-size: 1.25rem;
+            margin-bottom: 32px;
+            font-weight: 500;
+            color: #0d0d0e;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+            background: #fff;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 32px rgba(102,126,234,0.13);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #764ba2;
+            background: #f4f6fb;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.10);
+        }
+        .contact-box {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(102,126,234,0.09);
+            padding: 32px 24px 28px 24px;
+            margin-top: 16px;
+        }
+        .contact-box a {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .contact-box a:hover {
+            color: #764ba2;
+        }
+        .footer {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 0 0 16px 16px;
+            margin-top: 60px;
+            box-shadow: 0 -2px 12px rgba(102,126,234,0.08);
+        }
+        .footer .text-muted {
+            color: #e3e6f0 !important;
+        }
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-section {
+                padding: 36px 0 24px 0;
+            }
+            .feature-icon {
+                font-size: 2rem;
+                width: 48px;
+                height: 48px;
+            }
+            .contact-box {
+                padding: 18px 8px 18px 8px;
+            }
+        }

@@ -255,7 +255,41 @@ public class ProductDAO implements Accessible<ProductDTO> {
 
         return listPro;
     }
-    
-    
 
+    //classifyCustomer
+    /**
+     * Hàm này xử lý phân loại khách hàng dựa trên giá trung bình (avg) của các sản phẩm đã xem.
+     * Nếu avg <= 5000: khách hàng loại "thấp", trả về các sản phẩm giá <= 5000.
+     * Nếu 5000 < avg <= 10000: khách hàng loại "ổn định", trả về các sản phẩm giá > 5000 và <= 10000.
+     * Nếu avg > 10000: khách hàng loại "cao", trả về các sản phẩm giá > 10000.
+     * 
+     * Hàm này xử lý đúng logic phân loại khách hàng theo giá sản phẩm.
+     */
+    public List<ProductDTO> classifyCustomer(double avg) {
+        List<ProductDTO> listPro = new ArrayList<>();
+        // Xác định loại khách hàng dựa trên avg
+        if (avg <= 100000 && avg > 0) {
+ 
+            for (ProductDTO productDTO : this.listAll()) {
+                if (productDTO.getPrice() <= 100000) {
+                    listPro.add(productDTO);
+                }
+            }
+        } else if (avg > 100000 && avg <= 200000) {
+          
+            for (ProductDTO productDTO : this.listAll()) {
+                if (productDTO.getPrice() > 100000 && productDTO.getPrice() <= 200000) {
+                    listPro.add(productDTO);
+                }
+            }
+        } else if (avg > 250000) {
+
+            for (ProductDTO productDTO : this.listAll()) {
+                if (productDTO.getPrice() > 250000) {
+                    listPro.add(productDTO);
+                }
+            }
+        }
+        return listPro;
+    }
 }

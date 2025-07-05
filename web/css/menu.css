@@ -1,0 +1,36 @@
+  .navbar-custom {
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+                border-radius: 0 0 16px 16px;
+                padding: 0.5rem 0;
+            }
+            .navbar-custom .navbar-brand {
+                color: #fff;
+                font-weight: 700;
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+            .navbar-custom .nav-link {
+                color: #f4f6fb !important;
+                font-weight: 600;
+                margin-right: 10px;
+                transition: color 0.2s;
+                position: relative;
+            }
+            .navbar-custom .nav-link.active, 
+            .navbar-custom .nav-link:hover {
+                color: #ffd700 !important;
+            }
+            .navbar-custom .nav-link i {
+                margin-right: 6px;
+            }
+            @media (max-width: 991.98px) {
+                .navbar-custom .navbar-nav {
+                    background: #764ba2;
+                    border-radius: 0 0 12px 12px;
+                    padding: 10px 0;
+                }
+                .navbar-custom .nav-link {
+                    color: #fff !important;
+                }
+            }

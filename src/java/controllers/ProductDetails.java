@@ -48,11 +48,11 @@ public class ProductDetails extends HttpServlet {
         if (!alreadyViewed) {
             listProductViewed.add(product);
         }
-
+ 
         session.setAttribute("LIST_PRODUCT_VIEWED", listProductViewed);
         session.setAttribute("Product", product);
         req.getRequestDispatcher("product-details.jsp").forward(req, resp);
     }
-    
+ 
 
 }

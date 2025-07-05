@@ -7,89 +7,9 @@
         <title>User & Categories Overview</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/index.css">
-        <style>
-            body {
-                background: #f4f6fb;
-            }
-            .overview-box {
-                background: #fff;
-                border-radius: 14px;
-                box-shadow: 0 2px 16px rgba(102,126,234,0.09);
-                padding: 36px 32px 32px 32px;
-                max-width: 950px;
-                margin: 0 auto;
-                margin-top: 48px;
-            }
-            .avatar {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2.2rem;
-                font-weight: 700;
-                margin-right: 18px;
-                box-shadow: 0 2px 8px rgba(102,126,234,0.13);
-            }
-            .user-info-title {
-                font-size: 1.2rem;
-                font-weight: 700;
-                color: #2d3a4a;
-                margin-bottom: 2px;
-            }
-            .info-label {
-                font-weight: 600;
-                color: #667eea;
-                margin-right: 8px;
-            }
-            .list-group-item {
-                background: #f9fafd;
-                border: none;
-                border-bottom: 1px solid #e3e6f0;
-                font-size: 1rem;
-                padding: 12px 18px;
-            }
-            .list-group-item:last-child {
-                border-bottom: none;
-            }
-            .category-title {
-                font-size: 1.15rem;
-                font-weight: 700;
-                color: #764ba2;
-                margin-bottom: 12px;
-                letter-spacing: 0.5px;
-            }
-            .list-group .list-group-item {
-                border-radius: 8px;
-                margin-bottom: 8px;
-                background: #fff;
-                box-shadow: 0 1px 4px rgba(102,126,234,0.04);
-            }
-            .fw-semibold {
-                font-weight: 600 !important;
-            }
-            .footer {
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-                color: #fff;
-                margin-top: 50px;
-                border-radius: 0 0 12px 12px;
-                padding: 16px 0;
-            }
-            @media (max-width: 991.98px) {
-                .overview-box {
-                    padding: 18px 8px 18px 8px;
-                }
-                .avatar {
-                    width: 48px;
-                    height: 48px;
-                    font-size: 1.5rem;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="css/index.css"> 
+        <link rel="stylesheet" href="css/dashboard.css">
+       
     </head>
     <body>
         <%@include file="/admin-menu.jsp" %>
@@ -115,7 +35,7 @@
                         </div>
                     </div>
                     <ul class="list-group list-group-flush mb-2">
-                        <li class="list-group-item"><span class="info-label">Tài khoản:</span> ${sessionScope.account.account}</li>
+                        <li class="list-group-item"><span class="info-label">Tài khoản:</span> ${sessionScope.account.accoun}</li>
                         <li class="list-group-item"><span class="info-label">Ngày sinh:</span>
                             <fmt:formatDate value="${sessionScope.account.birthDay}" pattern="dd/MM/yyyy"/>
                         </li>

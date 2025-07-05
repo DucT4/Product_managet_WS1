@@ -3,21 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/ProductManagerController.java</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/product-portfolio.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/category-list.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/product-management.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/viewedProduct.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/admin-menu.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/models/DAO/CategoryDAO.java</file>
             <file>file:/D:/Prj301/Ws1_prj301/web/account-list.jsp</file>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/models/DTO/CategoryDTO.java</file>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/CategoriesController.java</file>
+            <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/ProductManagerController.java</file>
+            <file>file:/D:/Prj301/Ws1_prj301/web/css/product-management.css</file>
+            <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/ClassifyCustomerController.java</file>
+            <file>file:/D:/Prj301/Ws1_prj301/web/product-details.jsp</file>
             <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/ProductDetails.java</file>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/MainController.java</file>
-            <file>file:/D:/Prj301/Ws1_prj301/src/java/models/DAO/ProductDAO.java</file>
             <file>file:/D:/Prj301/Ws1_prj301/src/java/controllers/LoginController.java</file>
-            <file>file:/D:/Prj301/Ws1_prj301/web/login.jsp</file>
+            <file>file:/D:/Prj301/Ws1_prj301/src/java/models/DAO/ProductDAO.java</file>
+            <file>file:/D:/Prj301/Ws1_prj301/web/product-management.jsp</file>
         </group>
     </open-files>
 </project-private>

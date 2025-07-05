@@ -12,12 +12,28 @@
         <title>Chi tiết sản phẩm</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/index.css">
-        
+        <link rel="stylesheet" href="css/index.css"> 
+        <link rel="stylesheet" href="css/product-details.css">
     
     </head>
     <body>
-        <%@include file="/menu.jsp" %>
+        <%-- 
+            Giải thích:
+            - <c:choose> là thẻ JSTL dùng để thực hiện cấu trúc điều kiện (tương tự như switch-case hoặc if-else if-else trong Java).
+            - <c:when> là nhánh điều kiện, nếu biểu thức test đúng thì nội dung bên trong sẽ được thực thi.
+            - <c:otherwise> là nhánh mặc định, sẽ thực thi nếu tất cả các <c:when> đều sai.
+            Ở đây, nếu sessionScope.account khác rỗng (đã đăng nhập), sẽ include menu admin. Ngược lại, sẽ include menu thường.
+        --%>
+        <c:choose>
+            <c:when test="${not empty sessionScope.account}">
+                <%-- Nếu đã đăng nhập, hiển thị menu admin --%>
+                <jsp:include page="admin-menu.jsp" />
+            </c:when>
+            <c:otherwise>
+                <%-- Nếu chưa đăng nhập, hiển thị menu thường --%>
+                <jsp:include page="menu.jsp" />
+            </c:otherwise>
+        </c:choose>
         <div class="container mt-4">
             <div class="product-details">
                 <div class="row">

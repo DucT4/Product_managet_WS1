@@ -35,6 +35,7 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT_MANAGER = "productManagerServlet";
     private static final String DELETE_PRODUCT = "deleteProductServlet";
     private static final String SEARCH_BY_NAME = "searchByNameServlet";
+    private static final String CLASSIFY_CUSTOMER = "classifyCustomerController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -107,6 +108,9 @@ public class MainController extends HttpServlet {
                         break;
                     case "searchByname":     
                         url = SEARCH_BY_NAME;
+                        break;
+                    case "classifyCustomer":
+                        url = CLASSIFY_CUSTOMER;
                         break;
                     default:
                         url = WELCOME;
