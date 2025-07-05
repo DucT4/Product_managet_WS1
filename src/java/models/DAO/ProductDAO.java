@@ -203,58 +203,67 @@ public class ProductDAO implements Accessible<ProductDTO> {
     }
 
     //searchByName
-    public List<ProductDTO> searchByName(String nameProduct) {
-        List<ProductDTO> listPro = new ArrayList<>();
-        ProductDTO product = null;
-        Connection conn = null;
-        ResultSet rs = null;
-        try {
-            //connect database
-            conn = ConnectDB.getConnection();
-            //tao query
-            String sql = "SELECT * FROM products WHERE productName LIKE ?";
-            //tao doi tg query
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + nameProduct + "%");
-
-            //thuc thi
-            rs = ps.executeQuery();
-            System.out.println("rs:  " + rs);
-            while (rs.next()) {
-                String productId = rs.getString("productId");
-                String productName = rs.getString("productName");
-                String productImage = rs.getString("productImage");
-                String brief = rs.getString("brief");
-                Date postedDate = rs.getDate("postedDate");
-                int typeId = rs.getInt("typeId");
-                String accountID = rs.getString("account");
-                String unit = rs.getString("unit");
-                int price = rs.getInt("price");
-                int discount = rs.getInt("discount");
-
-                AccountDAO accDAO = new AccountDAO();
-                AccountDTO account = accDAO.getObjectById(accountID);
-                CategoryDAO cateDao = new CategoryDAO();
-                CategoryDTO category = cateDao.getObjectById(String.valueOf(typeId));
-
-                String categoryName = category.getCategoryName();
-                System.out.println("category name: " + categoryName);
-                product = new ProductDTO(productId, productName, productImage, brief, postedDate, category, account, unit, price, discount);
-                System.out.println("product : " + product);
-                listPro.add(product);
-            }
-        } catch (Exception e) {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e2) {
-                System.out.println(e.getMessage());
+    public List<ProductDTO> searchByNameInList(List<ProductDTO> list, String nameProduct) {
+        List<ProductDTO> result = new ArrayList<>();
+        for (ProductDTO product : list) {
+            if (product.getProductName().toLowerCase().contains(nameProduct.toLowerCase())) {
+                result.add(product);
             }
         }
-
-        return listPro;
+        return result;
     }
+    // public List<ProductDTO> searchByName(String nameProduct) {
+    //     List<ProductDTO> listPro = new ArrayList<>();
+    //     ProductDTO product = null;
+    //     Connection conn = null;
+    //     ResultSet rs = null;
+    //     try {
+    //         //connect database
+    //         conn = ConnectDB.getConnection();
+    //         //tao query
+    //         String sql = "SELECT * FROM products WHERE productName LIKE ?";
+    //         //tao doi tg query
+    //         PreparedStatement ps = conn.prepareStatement(sql);
+    //         ps.setString(1, "%" + nameProduct + "%");
+
+    //         //thuc thi
+    //         rs = ps.executeQuery();
+    //         System.out.println("rs:  " + rs);
+    //         while (rs.next()) {
+    //             String productId = rs.getString("productId");
+    //             String productName = rs.getString("productName");
+    //             String productImage = rs.getString("productImage");
+    //             String brief = rs.getString("brief");
+    //             Date postedDate = rs.getDate("postedDate");
+    //             int typeId = rs.getInt("typeId");
+    //             String accountID = rs.getString("account");
+    //             String unit = rs.getString("unit");
+    //             int price = rs.getInt("price");
+    //             int discount = rs.getInt("discount");
+
+    //             AccountDAO accDAO = new AccountDAO();
+    //             AccountDTO account = accDAO.getObjectById(accountID);
+    //             CategoryDAO cateDao = new CategoryDAO();
+    //             CategoryDTO category = cateDao.getObjectById(String.valueOf(typeId));
+
+    //             String categoryName = category.getCategoryName();
+    //             System.out.println("category name: " + categoryName);
+    //             product = new ProductDTO(productId, productName, productImage, brief, postedDate, category, account, unit, price, discount);
+    //             System.out.println("product : " + product);
+    //             listPro.add(product);
+    //         }
+    //     } catch (Exception e) {
+    //         try {
+    //             if (conn != null) {
+    //                 conn.close();
+    //             }
+    //         } catch (Exception e2) {
+    //             System.out.println(e.getMessage());
+    //         }
+    //     }
+
+    //     return listPro;
+    // }
 
     //classifyCustomer
     /**
@@ -288,6 +297,37 @@ public class ProductDAO implements Accessible<ProductDTO> {
                 if (productDTO.getPrice() > 250000) {
                     listPro.add(productDTO);
                 }
+            }
+        }
+        return listPro;
+    }
+
+    //loc san pham theo khoang gia
+    public List<ProductDTO> filterByPriceRangeType(String rangeType) {
+        int min = 0, max = Integer.MAX_VALUE;
+        switch (rangeType) {
+            case "under1m":
+                max = 1000000;
+                break;
+            case "1mto2m":
+                min = 1000000;
+                max = 2000000;
+                break;
+            case "2mto5m":
+                min = 2000000;
+                max = 5000000;
+                break;
+            case "above5m":
+                min = 5000000;
+                break;
+            default:
+                // Lấy tất cả
+        }
+        List<ProductDTO> listPro = new ArrayList<>();
+        for (ProductDTO product : this.listAll()) {
+            int price = product.getPrice();
+            if (price >= min && price <= max) {
+                listPro.add(product);
             }
         }
         return listPro;

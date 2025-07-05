@@ -25,13 +25,18 @@ public class ClassifyCustomerController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Lấy danh sách sản phẩm đã xem từ session giống ProductDetails.java
         HttpSession session = req.getSession();
         List<ProductDTO> listViewed = (List<ProductDTO>) session.getAttribute("LIST_PRODUCT_VIEWED");
-      System.out.println("listViewed size   : " + listViewed.size());
+        if (listViewed == null) {
+            listViewed = new ArrayList<>();
+        }
+        System.out.println("listViewed size   : " + listViewed.size());
         // Nếu chưa xem sản phẩm nào thì chuyển hướng về trang quản lý sản phẩm với thông báo
-        if (listViewed == null || listViewed.isEmpty()) {
+        if (listViewed.isEmpty()) {
             req.setAttribute("CLASSIFY_MESSAGE", "Bạn chưa xem sản phẩm nào để phân loại.");
             req.getRequestDispatcher("product-management.jsp").forward(req, resp); 
+            return;
         }
 
         // Tính trung bình giá sản phẩm đã xem
@@ -39,14 +44,14 @@ public class ClassifyCustomerController extends HttpServlet {
         for (ProductDTO pro : listViewed) {
             totalPrice += pro.getPrice();
         }
-        double avg = totalPrice / (listViewed.size()+1);
+        double avg = (double) totalPrice / listViewed.size();
 
         // Lấy danh sách sản phẩm phù hợp với trung bình giá
         ProductDAO dao = new ProductDAO();
         List<ProductDTO> listProSelected = dao.classifyCustomer(avg);
         System.out.println("listProSelected: " + listProSelected);
-        // Đưa danh sách sản phẩm phân loại vào session để hiển thị ở product-management.jsp
-        session.setAttribute("CLASSIFIED_PRO_LIST", listProSelected);
+        // Đưa danh sách sản phẩm phân loại vào request để hiển thị ở product-management.jsp
+        req.setAttribute("CLASSIFIED_PRO_LIST", listProSelected);
         req.setAttribute("CLASSIFY_MESSAGE", "Đã phân loại sản phẩm theo mức giá trung bình bạn đã xem (" + avg + " VND).");
         System.out.println("listProSelected size: " + listProSelected.size());
         System.out.println("avg: " + avg);
@@ -55,6 +60,3 @@ public class ClassifyCustomerController extends HttpServlet {
     }
 
 }
-
-
-
