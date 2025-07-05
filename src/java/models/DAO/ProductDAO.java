@@ -332,4 +332,63 @@ public class ProductDAO implements Accessible<ProductDTO> {
         }
         return listPro;
     }
+    // search by discount
+    // Lọc sản phẩm theo mức giảm giá (discount)
+    public List<ProductDTO> filterByDiscountRange(String discountRange) {
+        int min = 0, max = 100;
+        switch (discountRange) {
+            case "0to10":
+                min = 0;
+                max = 10;
+                break;
+            case "10to20":
+                min = 10;
+                max = 20;
+                break;
+            case "20to50":
+                min = 20;
+                max = 50;
+                break;
+            case "above50":
+                min = 50;
+                max = 100;
+                break;
+            default:
+                // Lấy tất cả
+                min = 0;
+                max = 100;
+        }
+        List<ProductDTO> filteredList = new ArrayList<>();
+        for (ProductDTO product : this.listAll()) {
+            int discount = product.getDiscount();
+            if (discount >= min && discount <= max) {
+                filteredList.add(product);
+            }
+        }
+        return filteredList;
+    }
+
+    //sort by price
+    /**
+     * Sắp xếp danh sách sản phẩm theo giá.
+     * 
+     * @param sortOrder Thứ tự sắp xếp: "asc" cho tăng dần, "desc" cho giảm dần. Nếu null hoặc khác, giữ nguyên thứ tự gốc.
+     * @return Danh sách sản phẩm đã được sắp xếp theo giá.
+     */
+  public List<ProductDTO> sortByPrice(String sortOrder) {
+      // Lấy toàn bộ danh sách sản phẩm
+      List<ProductDTO> productList = new ArrayList<>(this.listAll());
+      // Nếu sortOrder không null, thực hiện sắp xếp
+      if (sortOrder != null) {
+          if (sortOrder.equalsIgnoreCase("asc")) {
+              // Sắp xếp tăng dần theo giá
+              productList.sort((p1, p2) -> Integer.compare(p1.getPrice(), p2.getPrice()));
+          } else if (sortOrder.equalsIgnoreCase("desc")) {
+              // Sắp xếp giảm dần theo giá
+              productList.sort((p1, p2) -> Integer.compare(p2.getPrice(), p1.getPrice()));
+          }
+          // Nếu sortOrder không phải "asc" hoặc "desc", giữ nguyên thứ tự gốc
+      }
+      return productList;
+  }
 }

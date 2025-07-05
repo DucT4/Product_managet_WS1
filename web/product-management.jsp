@@ -1,4 +1,4 @@
-<%-- 
+s<%-- 
     Document   : product-management.jsp
     Created on : Jun 25, 2025, 9:41:50 AM
     Author     : ADMIN
@@ -45,249 +45,400 @@
                 <button type="submit" class="btn btn-success">Lọc</button>
             </form>
 
+            <%-- Form lọc theo giảm giá --%>
+            <form action="main" method="get" class="mb-3">
+                <input type="hidden" name="action" value="filterByDiscount" />
+                <label for="discountRange" class="form-label">Lọc theo mức giảm giá:</label>
+                <select name="discountRange" id="discountRange" class="form-select" style="width:auto;display:inline-block;">
+                    <option value="">-- Chọn mức giảm giá --</option>
+                    <option value="0to10">0% - 10%</option>
+                    <option value="10to20">10% - 20%</option>
+                    <option value="20to50">20% - 50%</option>
+                    <option value="above50">Trên 50%</option>
+                </select>
+                <button type="submit" class="btn btn-info">Lọc</button>
+            </form>
+
+            <%-- Form sắp xếp theo giá --%>
+           <form action="main" method="get" class="mb-3">
+                <input type="hidden" name="action" value="sortByPrice" />
+                <label for="sortOrder" class="form-label">Sắp xếp theo giá:</label>
+                <select name="sortOrder" id="sortOrder" class="form-select" style="width:auto;display:inline-block;">
+                    <option value="">-- Chọn thứ tự --</option>
+                    <option value="asc">Tăng dần</option>
+                    <option value="desc">Giảm dần</option>
+                </select>
+                <button type="submit" class="btn btn-secondary">Sắp xếp</button>
+            </form>
+
             <%-- Hiển thị danh sách sản phẩm theo chức năng đang thực thi --%>
             <c:choose>
                 <%-- Nếu có danh sách sản phẩm tìm kiếm, chỉ hiển thị danh sách này --%>
                 <c:when test="${not empty requestScope.SEARCHED_PRODUCTS}">
                     <h4>Kết quả tìm kiếm sản phẩm</h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-hashtag me-2"></i>ID</th>
-                                <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
-                                <th><i class="fas fa-image me-2"></i>Ảnh</th>
-                                <th><i class="fas fa-list me-2"></i>Danh mục</th>
-                                <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
-                                <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
-                                <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
-                                <th><i class="fas fa-cogs me-2"></i>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${requestScope.SEARCHED_PRODUCTS}" var="product">
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                        <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit me-1"></i>Sửa
-                                        </button>
-                                        <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash me-1"></i>Xóa
-                                        </a>
-                                        <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
-                                            <i class="fas fa-info-circle me-1"></i>Chi tiết
-                                        </a>
-                                    </td>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.SEARCHED_PRODUCTS}" var="product">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning"  value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
                 </c:when>
                 <%-- Nếu có danh sách sản phẩm lọc theo giá, chỉ hiển thị danh sách này --%>
                 <c:when test="${not empty requestScope.FILTERED_PRODUCTS}">
                     <h4>Kết quả lọc theo phạm vi giá</h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-hashtag me-2"></i>ID</th>
-                                <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
-                                <th><i class="fas fa-image me-2"></i>Ảnh</th>
-                                <th><i class="fas fa-list me-2"></i>Danh mục</th>
-                                <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
-                                <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
-                                <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
-                                <th><i class="fas fa-cogs me-2"></i>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${requestScope.FILTERED_PRODUCTS}" var="product">
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                        <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit me-1"></i>Sửa
-                                        </button>
-                                        <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash me-1"></i>Xóa
-                                        </a>
-                                        <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
-                                            <i class="fas fa-info-circle me-1"></i>Chi tiết
-                                        </a>
-                                    </td>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.FILTERED_PRODUCTS}" var="product">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning"  value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
                 </c:when>
-
-
+                <%-- sort by price--%>
+                   <c:when test="${not empty requestScope.FILTERED_DISCOUNT_PRODUCTS}">
+                    <h4>Kết quả lọc theo mức giảm giá</h4>
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.FILTERED_DISCOUNT_PRODUCTS}" var="product">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning"  value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
+                </c:when>
+                
+                <%-- Nếu có danh sách sản phẩm lọc theo giảm giá, chỉ hiển thị danh sách này --%>
+                <c:when test="${not empty requestScope.LIST_SORT}">
+                    <h4>Kết quả lọc theo mức giảm giá</h4>
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.LIST_SORT}" var="product">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly class="form-control-plaintext" style="width: 80px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" class="form-control-plaintext" style="width: 180px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" class="form-control-plaintext" style="width: 100px;"/> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" class="form-control-plaintext" style="width: 60px;"/><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly class="form-control-plaintext" style="width: 120px;"/>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning"  value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
+                </c:when>
 
                 <%-- Nếu có danh sách sản phẩm đã phân loại, chỉ hiển thị danh sách này --%>
                 <c:when test="${not empty requestScope.CLASSIFIED_PRO_LIST}">
                     <h4>Danh sách sản phẩm đã phân loại</h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-hashtag me-2"></i>ID</th>
-                                <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
-                                <th><i class="fas fa-image me-2"></i>Ảnh</th>
-                                <th><i class="fas fa-list me-2"></i>Danh mục</th>
-                                <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
-                                <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
-                                <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
-                                <th><i class="fas fa-cogs me-2"></i>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${requestScope.CLASSIFIED_PRO_LIST}" var="product">
-                            <form action="main">
-                                <input type="hidden" name="action" value="updateProduct" />
-                                <input type="hidden" name="brief" value="${product.brief}" />
-                                <input type="hidden" name="unit" value="${product.unit}" />
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <input type="text" name="productId" value="${product.productId}" readonly />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productName" value="${product.productName}" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productImg" value="${product.productImage}" />
-                                        <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="postedDate" value="${product.postedDate}" readonly />
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit me-1"></i>Sửa
-                                        </button>
-                                        <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash me-1"></i>Xóa
-                                        </a>
-                                        <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
-                                            <i class="fas fa-info-circle me-1"></i>Chi tiết
-                                        </a>
-                                    </td>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
                                 </tr>
-                            </form>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.CLASSIFIED_PRO_LIST}" var="product">
+                                    <tr>
+                                        <input type="hidden" name="brief" value="${product.brief}" />
+                                        <input type="hidden" name="unit" value="${product.unit}" />
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" />
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning"  value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
                 </c:when>
 
                 <%-- Nếu không có chức năng nào ở trên, hiển thị danh sách sản phẩm mặc định --%>
                 <c:otherwise>
                     <h4>Danh sách sản phẩm</h4>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-hashtag me-2"></i>ID</th>
-                                <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
-                                <th><i class="fas fa-image me-2"></i>Ảnh</th>
-                                <th><i class="fas fa-list me-2"></i>Danh mục</th>
-                                <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
-                                <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
-                                <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
-                                <th><i class="fas fa-cogs me-2"></i>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${sessionScope.PRO_LIST}" var="product">
-                            <form action="main">
-                                <input type="hidden" name="action" value="updateProduct" />
-                                <input type="hidden" name="brief" value="${product.brief}" />
-                                <input type="hidden" name="unit" value="${product.unit}" />
+                    <form action="main" method="post">
+                        <input type="hidden" name="action" value="updateProduct" />
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <input type="text" name="productId" value="${product.productId}" readonly />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productName" value="${product.productName}" />
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productImg" value="${product.productImage}" />
-                                        <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="postedDate" value="${product.postedDate}" readonly />
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit me-1"></i>Sửa
-                                        </button>
-                                        <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash me-1"></i>Xóa
-                                        </a>
-                                        <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
-                                            <i class="fas fa-info-circle me-1"></i>Chi tiết
-                                        </a>
-                                    </td>
+                                    <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                    <th><i class="fas fa-tag me-2"></i>Tên sản phẩm</th>
+                                    <th><i class="fas fa-image me-2"></i>Ảnh</th>
+                                    <th><i class="fas fa-list me-2"></i>Danh mục</th>
+                                    <th><i class="fas fa-dollar-sign me-2"></i>Giá</th>
+                                    <th><i class="fas fa-percentage me-2"></i>Giảm giá</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Ngày đăng</th>
+                                    <th><i class="fas fa-cogs me-2"></i>Hành động</th>
                                 </tr>
-                            </form>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${sessionScope.PRO_LIST}" var="product">
+                                    <tr>
+                                        <input type="hidden" name="brief" value="${product.brief}" />
+                                        <input type="hidden" name="unit" value="${product.unit}" />
+                                        <td>
+                                            <input type="text" name="productId" value="${product.productId}" readonly />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productName" value="${product.productName}" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productImg" value="${product.productImage}" />
+                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="price" value="${product.price}" /> <span class="text-success fw-bold">VND</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" value="${product.discount}" /><span class="text-warning fw-bold">%</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="postedDate" value="${product.postedDate}" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-warning" value="${product.productId}">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </button>
+                                            <a href="main?action=deleteProduct&productId=${product.productId}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </a>
+                                            <a href="main?action=product-detail&id=${product.productId}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
                 </c:otherwise>
             </c:choose>
         </div>

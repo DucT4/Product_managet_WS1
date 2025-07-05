@@ -37,6 +37,9 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_BY_NAME = "searchByNameServlet";
     private static final String CLASSIFY_CUSTOMER = "classifyCustomerController";
     private static final String FILTER_BY_PRICE_RANGE_TYPE = "priceFilterController";
+    private static final String FILTER_BY_DISCOUNT = "discountFilterController";
+    private static final String SORT_BY_PRICE = "sortByPriceController";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -106,7 +109,7 @@ public class MainController extends HttpServlet {
                     case "updateProduct":
                         url = UPDATE_PRODUCT;
                         break;
-                    case "searchByname":     
+                    case "searchByname":
                         url = SEARCH_BY_NAME;
                         break;
                     case "classifyCustomer":
@@ -114,6 +117,12 @@ public class MainController extends HttpServlet {
                         break;
                     case "filterByPriceRangeType":
                         url = FILTER_BY_PRICE_RANGE_TYPE;
+                        break;
+                    case "filterByDiscount":
+                        url = FILTER_BY_DISCOUNT;
+                        break;
+                    case "sortByPrice":
+                        url = SORT_BY_PRICE;
                         break;
                     default:
                         url = WELCOME;
