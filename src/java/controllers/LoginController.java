@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet {
             }
             AccountDAO dao = new AccountDAO();
             AccountDTO acc = dao.checkLogin(account, password);
+//            System.out.println("role in system: " + acc.getRoleInSystem());
             if (account != null) {
                 System.out.println("login success!!! ");
                 session.setAttribute("account", acc);
@@ -53,6 +54,9 @@ public class LoginController extends HttpServlet {
                 listCategories = daoCate.listAll();
                 session.setAttribute("categories", listCategories);
                 session.setAttribute("PRO_LIST", listPro);
+                //
+                      AccountDTO acc1 = (AccountDTO) session.getAttribute("account");
+                      System.out.println("role sytem in list: " + acc1.getRoleInSystem());
                 resp.sendRedirect("main?action=categories");
             } else {
                 System.out.println("login failed!!");

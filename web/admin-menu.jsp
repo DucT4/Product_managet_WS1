@@ -32,7 +32,7 @@
                             <a class="nav-link" href="dashboard.jsp"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="main?action=account"><i class="fa-solid fa-users"></i>Tài khoản</a>
+                            <a class="nav-link" href="accountServlet"><i class="fa-solid fa-users"></i>Tài khoản</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="main?action=categories"><i class="fa-solid fa-list"></i>Danh mục</a>

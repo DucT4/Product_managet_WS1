@@ -71,7 +71,6 @@ public class MainController extends HttpServlet {
                         url = CATEGORY;
                         break;
                     case "updateCategory":
-                        System.out.println("AAAA");
                         url = UPDATE_CATEGORY;
                         break;
                     case "delete":
@@ -109,7 +108,7 @@ public class MainController extends HttpServlet {
                     case "updateProduct":
                         url = UPDATE_PRODUCT;
                         break;
-                    case "searchByname":
+                    case "searchByName":
                         url = SEARCH_BY_NAME;
                         break;
                     case "classifyCustomer":

@@ -43,6 +43,7 @@ public class AccountDAO implements Accessible<AccountDTO> {
             ps.setBoolean(6, account.isGender());
             ps.setString(7, account.getPhone());
             ps.setBoolean(8, account.isIsUse());
+
             ps.setInt(9, account.getRoleInSystem());
 
             result = ps.executeUpdate();
@@ -240,6 +241,11 @@ public class AccountDAO implements Accessible<AccountDTO> {
 
     //feature login
     // AccountDAO.java
+    
+    
+    
+    
+    
     public AccountDTO checkLogin(String account, String password) {
         AccountDTO result = null;
         Connection conn = null;
