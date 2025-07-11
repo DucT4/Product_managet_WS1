@@ -36,7 +36,7 @@
                         <c:forEach items="${sessionScope.PRO_LIST}" var="product">
                             <div class="col-md-4 col-sm-6 mb-4">
                                 <div class="card h-100">
-                                    <img src="images/${product.productImage}" class="card-img-top" alt="${product.productName}">
+                                    <img src="${pageContext.request.contextPath}${product.productImage}" class="card-img-top" alt="${product.productName}">
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">${product.productName}</h5>
                                         <p class="card-text">${product.price} VND</p>

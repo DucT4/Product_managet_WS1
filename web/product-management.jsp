@@ -102,7 +102,7 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
@@ -162,7 +162,8 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                            <span style="color:red">${product.productImage}</span>
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
@@ -222,7 +223,8 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                            <span style="color:red">${product.productImage}</span>
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
@@ -283,7 +285,8 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" class="form-control-plaintext" style="width: 120px;"/>
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
+                                            <span style="color:red">${product.productImage}</span>
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail ms-2">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly class="form-control-plaintext" style="width: 120px;"/>
@@ -346,7 +349,7 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" />
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
@@ -409,7 +412,7 @@ s<%--
                                         </td>
                                         <td>
                                             <input type="text" name="productImg" value="${product.productImage}" />
-                                            <img src="images/${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
+                                            <img src="${pageContext.request.contextPath}${product.productImage}" width="50" alt="${product.productName}" class="img-thumbnail">
                                         </td>
                                         <td>
                                             <input type="text" name="productCategoryName" value="${product.type.categoryName}" readonly/>
